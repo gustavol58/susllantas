@@ -1,0 +1,13 @@
+/* para que el fondo de la página web sea una imagen responsive: */
+html {
+  height:100%;
+  width:100%;
+}
+body {
+
+  /* background:#8ba987 url('fondo4.jpg') no-repeat center center; */
+  background-image: url('../img/fondo.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+}

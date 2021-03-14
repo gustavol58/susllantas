@@ -1,0 +1,21 @@
+/* =====================================================
+     estilos para que el formulario login sea transparente:
+ =======================================================
+*/
+/* el contenedor del formulario: */
+.card{
+  border: none;
+  /* border: 1px solid red; */
+  background: rgba(130,130,130,0) !important;
+  margin-top: 25%;
+}
+/* los label y "olvido contraseña" en blanco oscuro */
+label, a{
+  color: white !important;
+  font-weight: bold !important;
+}
+/* el color de fondo (naranja) para el botón enviar */
+button{
+  border: none !important;
+  background-color: #EE7B10 !important;
+}

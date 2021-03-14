@@ -1,0 +1,63 @@
+/* =====================================================================
+  estilos  para datatables
+=====================================================================*/
+
+/* estilo para que los filtros de cada columna no dañen el ancho individual
+de cada una de ellas */
+thead input {
+    width: 100%;
+}
+
+/* style para que en la datatable no aparezca el SEARCH general */
+.dataTables_filter {
+  display: none;
+}
+
+
+/* =====================================================================
+  estilos  para el manejo de los scroll horizontales superior e inferior
+=====================================================================*/
+
+/* titulo antes del scroll horizontal superior */
+.tit{
+  font-weight: bold;
+  font-size: 1.5em;
+  color: #1e79d5;
+}
+
+.large-table-container-3 {
+ overflow-x: scroll;
+ overflow-y: auto;
+}
+.large-table-container-3 table {
+ /* border: 1px solid blue;/*Just for test, to see the 'fake' div*/
+}
+.large-table-fake-top-scroll-container-3 {
+ /* este borde blanco (no se verá) es para que pueda tomar los margin-bottom
+ y margin-top y que de esta manera el scroll horizontal superior no quede pegado
+ ni a la info de la tabla ni al título de la pantalla */
+ border: 1px solid white;
+ margin-top: 10px;
+ margin-bottom: 10px;
+ overflow-x: scroll;
+ overflow-y: auto;
+}
+.large-table-fake-top-scroll-container-3 div {
+   line-height:1px;
+
+   /* la razón de ser de las siguientes dos lineas se encuentra
+   explicada en la vista productos-listar.blade.php, allí se puso
+   una cadena de 90 caracteres para que el scroll horizontal
+   superior esté cuadrado con la datatable. Estos caracteres
+   deben tener un font-size de 1.7em, y el color white se coloca
+   para que sean invisibles en la ventana de la aplicación */
+   font-size: 1.7em;
+   color: white;
+}
+
+/* estilo para que el mensaje "Cargando registros..." del datatable,
+se muestre alineado a la izquierda: */
+.cargando_registros{
+  /* border: 1px solid green; */
+  text-align: left;
+}
