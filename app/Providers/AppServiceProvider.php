@@ -25,7 +25,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      // para que se muestre el menú en app.blade.php:
+      // para que se muestre el menú en appnolive.blade.php:
+      // view()->composer lo que hace es indicar que cada que sea
+      // renderizada la vista layouts.appnolive, se ejecutará el clousure
+      // dado (en este caso, el clousure lo que hace es enviar a
+      // la vista el parámetro 'menus')
+      view()->composer('layouts.appnolive', function($view) {
+              $view->with('menus', Menu::menus());
+          });
+
+      view()->composer('layouts.appnolive', function($view) {
+              $view->with('menus_roles', Menu_rol::menus_roles());
+          });
+
+          // para que se muestre el menú en app.blade.php:
       // view()->composer lo que hace es indicar que cada que sea
       // renderizada la vista layouts.app, se ejecutará el clousure
       // dado (en este caso, el clousure lo que hace es enviar a

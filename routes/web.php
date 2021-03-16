@@ -1,5 +1,14 @@
 <?php
 
+    use App\Http\Controllers\HomeController;
+    use App\Http\Controllers\ProductoController;
+    use App\Http\Controllers\Auth\LoginController;
+    use App\Http\Controllers\Auth\RegisterController;
+    use App\Http\Controllers\Auth\ForgotPasswordController;
+    use App\Http\Controllers\Auth\ResetPasswordController;
+    use App\Http\Livewire\ClienteLive;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,33 +27,65 @@
 // para que la url raiz vaya directamente al login
 // tuve que ser comentariada porque daña el ruteo en un hosting compartido:
 // Route::redirect('/', '/home');
-Route::get('/', 'HomeController@index');
+// Route::get('/', 'HomeController@index');
 
-Auth::routes();
+// llamar una ruta de un controlador NOLIVEWIRE, en laravel 7:
+Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/home', 'HomeController@index')->name('home');
+// 14mar2021:
+// Auth::routes();
+// La lista completa de Auth::routes() se encuentra
+// en /var/www/html/susllantas/vendor/laravel/ui/src/AuthRouteMethods.php
+// enseguida solo se modificaron (por lo de livewire) los que aplican para sus llantas:
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
+Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/password/reset/{token}', [Controller::class, 'showResetForm'])->name('password.reset');
+Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
-Route::get('/cambiar_clave' , 'HomeController@formu_cambiar_clave');
-Route::post('/cambiar_clave' , 'HomeController@grabar_nueva_clave');
+// 14mar2021: antes , en laravel 6, los métodos se llamaban asi:
+// Route::get('/home', 'HomeController@index')->name('home');
+// Pero ahora, para llamar una ruta de un controlador NOLIVEWIRE, en laravel 7:
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+// 14mar2021: antes , en laravel 6, los métodos se llamaban asi:
+// Route::get('/home', 'HomeController@index')->name('home');
+// Pero ahora, para llamar una ruta de un controlador NOLIVEWIRE, en laravel 7:
+Route::get('/cambiar_clave', [HomeController::class, 'formu_cambiar_clave']);
+Route::post('/cambiar_clave', [HomeController::class, 'grabar_nueva_clave']);
 
 // Se decidió hacer el control auth desde el propio controlador Producto, por
 // eso está comentariada esta linea de control por middleware:
 // Route::get('/productos', 'ProductoController@index')->middleware( 'auth' );
 
 // rutas para el crud de productos:
-Route::resource('productos' , 'ProductoController');
+// 14mar2021:
+// Route::resource('productos' , 'ProductoController');
+Route::get('/productos', [ProductoController::class, 'index']);
+Route::post('/productos', [ProductoController::class, 'store']);
+Route::get('/productos/create', [ProductoController::class, 'create']);
+Route::put('/productos/{producto}', [ProductoController::class, 'update']);
+Route::get('/productos/{producto}', [ProductoController::class, 'show']);
+Route::delete('/productos/{producto}', [ProductoController::class, 'destroy']);
+Route::get('/productos/{producto}/edit', [ProductoController::class, 'edit']);
 
-// rutas para el crud de productos:
-Route::resource('clientes' , 'ClienteController');
+// Existen 2 url para usar datatables y mostrar el listado
+// de productos:  la que lleva al método index() y es llamada
+// desde Route::get('/productos'), y la url jquery, es esta:
+Route::get('/productos-listar-jquery', [ProductoController::class, 'listarProductosJquery']);
+
+// rutas para el crud de clientes:
+// 14mar2021: Es un componente livewire, se llama asi:
+Route::get('/clientes', ClienteLive::class);
 
 // rutas para el crud de vehículos:
 Route::resource('vehiculos' , 'VehiculoController');
 
-// Existen 2 url para usar datatables y mostrar el listado
-// de productos:  la que lleva al método index() y es llamada
-// desde Route::resource(), y la url jquery, es esta:
-Route::get('/productos-listar-jquery', 'ProductoController@listarProductosJquery');
+
 
 // Existen 2 url para usar datatables y mostrar el listado
 // de clientes:  la que lleva al método index() y es llamada

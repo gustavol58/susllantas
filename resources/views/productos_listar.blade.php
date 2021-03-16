@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appnolive')
 
 @section('css_js_datatables')
 

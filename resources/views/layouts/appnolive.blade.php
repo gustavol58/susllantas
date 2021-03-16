@@ -1,45 +1,56 @@
-<!DOCTYPE html>
+{{--
+   los parámetros $menus y $arr_permisos fueron llenados en \app\Providers\AppServiceProvider.php
+   $menus   un array que tendrá tantas filas como registros ENABLED tenga la
+            la tabla menus. Cada registro tiene 9 columnas:
+               [id] => 17
+               [name] => Órdenes abiertas
+               [slug] => ordenes_abiertas_listar
+               [parent] => 13
+               [order] => 2
+               [enabled] => 1
+               [created_at] =>
+               [updated_at] =>
+               [submenu]  .... este a su vez es un array, que tiene las sub-opciones.
+   $menus_roles   un array que tendrá tantas filas como registros tenga la tabla
+                   menus_roles, con un columna llamada "permiso" y en la cual está
+                   el rol y el id menu separados por un _, ejemplo: adm_18 , pat_13, ....
+--}}
+{{-- <pre>
+{{print_r($menus)}} --}}
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="http://localhost/markka/public/css/app.css">
-        {{-- libreria pikaday: Para pedir fechas con datetimepicker: --}}
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
-        
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <!-- styles propios para menus:
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Scripts -->
+    <!-- el defer tuvo que ser eliminado porque dañaba los estilos de las datatables -->
+    <!-- <script src="{xxx{ asset('js/app.js') }}" defer></script> -->
+    <script src="{{ asset('js/app.js') }}" ></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles laravel ui -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- styles propios para menus:
             para las opciones multinivel de los menús
             para que el menú tenga un fondo azul y las opciones otros colores    -->
-        <link href="{{ asset('css/propios_menus.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/propios_menus.css') }}" rel="stylesheet">
 
-        <style>
-            .imagen_ini{
-                background-image: url("{{asset('img/first_option.png')}}");
-                width: 100%;
-                height: 100%;
-            }
-            .imagen_login_own{
-                background-image: url("{{asset('img/fondo_login.jpg')}}");
-                width: 100%;
-                height: 100%;
-            }
-        </style> 
+    @yield('css_js_datatables')
 
-        @livewireStyles
-
-        <!-- Scripts -->
-        <script src="http://localhost/susllantas/public/js/app.js" defer></script>
-    </head>
-    <body class="font-sans antialiased">
+</head>
+<body>
+    <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="height: 3em !important;">
             <div class="container-fluid">
                 <a class="navbar-brand"  href="{{ url('/') }}">
@@ -102,34 +113,25 @@
                     </ul>
                 </div>
             </div>
-        </nav>        
-        {{-- <x-jet-banner /> --}}
+        </nav>
+        <main class="py-4 bg-white" style="padding-top: 0 !important;">
+            @yield('content')
+        </main>
 
-        <div class="min-h-screen bg-gray-100">
-            {{-- @livewire('navigation-menu') --}}
+    </div>
 
-                {{-- linea que solo estará sin comentario en el AMBIENTE DE PRUEBAS --}}
-                {{-- <p class="text-font-bold text-3xl text-center text-red-500">AMBIENTE DE PRUEBAS</p> --}}
+    {{-- 2) Una sección validacion_form, por si alguna vista que
+      llame a esta plantilla necesita validar uno de sus formularios: --}}
+    @yield('javascript_jquery_validation')
 
-            <!-- Page Heading -->
-            {{-- <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header> --}}
+    {{-- 3) Una section onReady() que se dejará lista por si alguna vista
+      que llame esta plantilla necesita rellenarla con algún código
+      específico --}}
+    @yield('javascript_onReady')
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
+    {{-- 4) una section "adicionales" por si alguna vista quiere agregar
+      funciones javascript que no estén dentro del onReady() --}}
+    @yield('javascript_funciones')
 
-        {{-- @stack('modals') --}}
-
-        @livewireScripts
-        {{-- librerias moment.js y pikaday: Para pedir fechas con datetimepicker: --}}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>  
-     
-    </body>
+</body>
 </html>
