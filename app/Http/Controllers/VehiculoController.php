@@ -159,6 +159,7 @@ class VehiculoController extends Controller
       //       cual ya trae la prevención de inyección sql:
       $coll_cliente_nombre = Cliente::select(DB::raw('concat(razon_social," ",nombre1," ",nombre2," ",apellido1," ",apellido2) nombre'))->where('id' , $cliente_id)->get();
       $cliente_nombre = $coll_cliente_nombre->toArray()[0]['nombre'];
+   
       return view('vehi_listar_uncliente' , [
         'cliente_id' => $cliente_id ,
         'cliente_nombre' => $cliente_nombre ,

@@ -27,5 +27,9 @@
     "If you did not receive the email": "Si no has recibido el email",
     "click here to request another": "pulsa aquí para que te enviemos otro",
     "User name / E-mail": "Nombre usuario / e-mail",
-    "User name": "Nombre de usuario"    
+    "User name": "Nombre de usuario",    
+    "Showing": "&nbsp;",    
+    "to": "a",    
+    "of": "de",    
+    "results": "&nbsp;"  
 }

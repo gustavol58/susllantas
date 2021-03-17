@@ -3,7 +3,7 @@
   $baseUrlRegresarVehi = url('/cliente/vehi') .  "/" . $vehiculo->cliente_id  ;
 @endphp
 
-@extends('layouts.app')
+@extends('layouts.appnolive')
 
 @section('css_js_datatables')
   {{-- <meta name="csrf-token2" content="{{ csrf_token() }}"> --}}

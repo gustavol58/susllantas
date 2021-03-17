@@ -35,7 +35,8 @@ class ClienteLive extends Component
     {
         $arr_params =[];
         $sql1 = "select subcon.* 
-                    from (select cli.origen,
+                    from (select cli.id,
+                            cli.origen,
                             cli.doc_num,
                             case
                                 when cli.razon_social IS NULL then trim(CONCAT(TRIM(cli.nombre1),' ',trim(IFNULL(cli.nombre2,'')),' ',trim(IFNULL(cli.apellido1,'')),' ',trim(IFNULL(cli.apellido2,''))))

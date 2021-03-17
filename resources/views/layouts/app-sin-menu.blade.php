@@ -1,3 +1,11 @@
+{{-- 
+    17mar2021
+    el "app.blade" llamado por los componentes livewire es app.blade.php
+    el "app.blade" llamado por los componentes NO livewire. appnolive.blade.php
+    NOTA: el app-sin-menu.blade.php, por ser llamado por un 
+    componente NO liveware, es similar al appnolive.blade.php 
+--}}
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>

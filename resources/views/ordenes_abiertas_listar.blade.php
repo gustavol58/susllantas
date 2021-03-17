@@ -5,7 +5,7 @@ Recibe un parámetro:
    origen      tendrá 'editar' si fue llamado desde OrdenController@listar_ordenes_abiertas
                y tendrá 'cerrar' si fue llamado desde OrdenController@listar_ordenes_cerrar --}}
 
-@extends('layouts.app')
+@extends('layouts.appnolive')
 
 @section('css_js_datatables')
 

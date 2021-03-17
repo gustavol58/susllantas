@@ -16,6 +16,15 @@
                 {{-- títulos de columna - botón ordenar en cada una --}}
                 <thead class="justify-between">
                     <tr class="bg-green-500">
+                        <th>
+                            
+                        </th>
+                        <th>
+
+                        </th>
+                        <th>
+
+                        </th>
                         <th class="border border-l-1">
                             <div class="flex">
                                 <div class="flex-1">
@@ -185,6 +194,15 @@
                     {{-- filtros  --}}
                     <tr>
                         <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
                             <input class="w-full mt-1 border rounded border-gray-300" type="text" wire:model="origen">
                         </td>
                         <td>
@@ -216,6 +234,31 @@
                     {{-- cuerpo de la tabla  --}}
                     @foreach ($clientes as $cliente)
                         <tr class="bg-white border-4 border-gray-200">
+                            
+                            <td>
+                                <a href="{{ url('/cliente/vehi/' . $cliente->id ) }}">
+                                    <div class="h-8 w-8">
+                                        <img id='ico_vehiculo' alt='ver vehículos' height='45' src = '{{ asset('img/iconos/ico_vehiculo.png') }}'/>
+                                    </div>
+                                </a>
+                            </td>
+
+                            <td>
+                                <a href='{{ url("/clientes/" . $cliente->id . "/edit" ) }}'>
+                                    <div class="h-8 w-8">
+                                        <img id='ico_editar' alt='editar' src = '{{ asset('img/iconos/ico_editar.png') }}'/>
+                                    </div>
+                                </a>
+                            </td>
+
+                            <td>
+                                <a href='javascript:void(0);' id='btn-eliminar-cliente' data-id={{$cliente->id}} >
+                                    <div class="h-8 w-8">
+                                        <img id='ico_eliminar' alt='eliminar' height='45' src = '{{ asset('img/iconos/ico_eliminar.png') }}'/>
+                                    </div>
+                                </a>
+                            </td>
+
                             <td class="border border-gray-300">
                                 <span>{{$cliente->origen}}</span>
                             </td>

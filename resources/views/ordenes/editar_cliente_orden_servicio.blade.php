@@ -5,7 +5,7 @@
             algunos mensajes
 --}}
 {{-- {{dd($cliente)}} --}}
-@extends('layouts.app')
+@extends('layouts.appnolive')
 
 @section('css_js_datatables')
    {{-- 11nov2019 comentariado por que ya está en layouts.app --}}
